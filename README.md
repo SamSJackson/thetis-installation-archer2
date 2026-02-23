@@ -31,8 +31,8 @@ The documentation and method of requesting access is here: [Archer2 - Getting Ac
 SSH into Archer2 with the account you have been provided. Follow instructions here: [Archer2 - Docs](https://docs.archer2.ac.uk/user-guide/connecting-totp/).
 The account that you get will be assigned a particular `project` and `username`, relevant for later.
 
-For me, after setting up SSH keys, this is:
-`ssh sjackson@login.archer2.ac.uk`
+After setting up SSH keys, this is:
+`ssh <username>@login.archer2.ac.uk`
 
 ## Moving Files
 
