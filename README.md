@@ -4,7 +4,7 @@ The following are instructions that were valid as of 19/02/26. Please contact me
 
 The general workflow is:
 
-1. Login to Archer2 and copy the zipped file from local PC.
+1. Login to Archer2 and copy the zipped `install_scripts.zip` folder from local PC.
 
 2. Edit and move relevant files to the work directory (firedrake-configure, constraints.txt, both slurm files)
 
@@ -38,18 +38,22 @@ For me, after setting up SSH keys, this is:
 
 In a separate terminal, you will copy over the downloaded zip file using `scp` (Secure Copy). 
 
-`scp thetis_installation.zip <username>@login.archer2.ac.uk:/home/<project>/<project>/<username>`
+`scp install_scripts.zip <username>@login.archer2.ac.uk:/home/<project>/<project>/<username>`
 
 **Important:** Some of these files have variables that must be changed to adapt for your system.
 
 Unzip this file and you have to move certain files to your work directory:
 ```
 export WORK_DIR=/work/<project>/<project>/<username>
-mv thetis_installation/constraints.txt $WORK_DIR
-mv thetis_installation/firedrake-configure-2025.10.2 $WORK_DIR
-mv thetis_installation/firedrake_check.slurm $WORK_DIR
-mv thetis_installation/petsc_check.slurm $WORK_DIR
-mv thetis_installation/thetis_example.slurm $WORK_DIR
+```
+
+```
+unzip install_scripts.zip
+mv constraints.txt $WORK_DIR
+mv firedrake-configure-2025.10.2 $WORK_DIR
+mv firedrake_check.slurm $WORK_DIR
+mv petsc_check.slurm $WORK_DIR
+mv thetis_example.slurm $WORK_DIR
 ```
 
 ## PETSc Install

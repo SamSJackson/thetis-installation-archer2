@@ -3,7 +3,8 @@
 contact me on Slack if things are no longer working.</p>
 <p>The general workflow is:</p>
 <ol type="1">
-<li><p>Login to Archer2 and copy zip file from local PC.</p></li>
+<li><p>Login to Archer2 and copy the zipped
+<code>install_scripts.zip</code> folder from local PC.</p></li>
 <li><p>Edit and move relevant files to the work directory
 (firedrake-configure, constraints.txt, both slurm files)</p></li>
 <li><p>Run <code>sh petsc_install.sh</code></p></li>
@@ -35,29 +36,33 @@ Docs</a>. The account that you get will be assigned a particular
 <h2 id="moving-files">Moving Files</h2>
 <p>In a separate terminal, you will copy over the downloaded zip file
 using <code>scp</code> (Secure Copy).</p>
-<p><code>scp thetis_installation.zip &lt;username&gt;@login.archer2.ac.uk:/home/&lt;project&gt;/&lt;project&gt;/&lt;username&gt;</code></p>
+<p><code>scp install_scripts.zip &lt;username&gt;@login.archer2.ac.uk:/home/&lt;project&gt;/&lt;project&gt;/&lt;username&gt;</code></p>
 <p><strong>Important:</strong> Some of these files have variables that
 must be changed to adapt for your system.</p>
 <p>Unzip this file and you have to move certain files to your work
 directory:</p>
-<pre><code>export WORK_DIR=/work/&lt;project&gt;/&lt;project&gt;/&lt;username&gt;
-mv thetis_installation/constraints.txt $WORK_DIR
-mv thetis_installation/firedrake-configure-2025.10.2 $WORK_DIR
-mv thetis_installation/firedrake_check.slurm $WORK_DIR
-mv thetis_installation/petsc_check.slurm $WORK_DIR
-mv thetis_installation/thetis_example.slurm $WORK_DIR</code></pre>
+<pre><code>export WORK_DIR=/work/&lt;project&gt;/&lt;project&gt;/&lt;username&gt;</code></pre>
+<pre><code>unzip install_scripts.zip
+mv constraints.txt $WORK_DIR
+mv firedrake-configure-2025.10.2 $WORK_DIR
+mv firedrake_check.slurm $WORK_DIR
+mv petsc_check.slurm $WORK_DIR
+mv thetis_example.slurm $WORK_DIR</code></pre>
 <h2 id="petsc-install">PETSc Install</h2>
 <p>Edit the <code>petsc_install.sh</code> file and change the variable
 <code>BUILD_DIR</code> to include your project and username.</p>
 <p>Then, run the file <code>sh petsc_install.sh</code>.</p>
 <h3 id="petsc-check">PETSc Check</h3>
-<p>To ensure that PETSc is installed correctly, we will run the
-<code>petsc_check.slurm</code> script from our work directory.</p>
-<p>Firstly, we must update the lines:</p>
+<p>Confirm that PETSc has installed correctly with the
+<code>petsc_check.slurm</code> script.</p>
+<p>Edit the <code>petsc_check.slurm</code> script from the work
+directory, ensuring that the lines starting with the following variables
+are updated:</p>
 <pre><code>#SBATCH --account=&lt;project&gt;
-BUILD_DIR</code></pre>
-<p>In the SBATCH case, <code>&lt;project&gt;</code> refers to your
-account budget code, which you can find on SAFE (refer to docs: <a
+BUILD_DIR=</code></pre>
+<p>Note that <code>&lt;project&gt;</code> in the SBATCH case is
+<strong>different</strong> from the norm and refers to your custom
+budget code, as found in SAFE (refer to docs: <a
 href="https://docs.archer2.ac.uk/faq/#checking-budgets">Archer2 - Budget
 Code</a>)</p>
 <p>Then, run the script with <code>sbatch petsc_check.slurm</code>.</p>
@@ -71,16 +76,21 @@ variable <code>BUILD_DIR</code> to include your project and
 username.</p>
 <p>Then, run the file <code>sh firedrake_install.sh</code>.</p>
 <h3 id="firedrake-check">Firedrake Check</h3>
-<p>To ensure that Firedrake is installed correctly, we will run the
-<code>firedrake_check.slurm</code> script from our work directory.</p>
-<p>Firstly, we must update the lines:</p>
+<p>Once again, verify that Firedrake has installed correctly with the
+<code>firedrake_check.slurm</code> script.</p>
+<p>Edit the <code>firedrake_check.slurm</code> script from the work
+directory, ensuring that the lines starting with the following variables
+are updated:</p>
 <pre><code>#SBATCH --account=&lt;project&gt;
-BUILD_DIR</code></pre>
-<p>In the SBATCH case, <code>&lt;project&gt;</code> refers to your
-account budget code, just like the PETSC <code>petsc_check.slurm</code>
-file.</p>
-<p>Then, run the script with <code>sbatch firedrake_check.slurm</code>.
-## Thetis Install</p>
+BUILD_DIR=</code></pre>
+<p>Note that <code>&lt;project&gt;</code> in the SBATCH case is
+<strong>different</strong> from the norm and refers to your custom
+budget code, as found in SAFE (refer to docs: <a
+href="https://docs.archer2.ac.uk/faq/#checking-budgets">Archer2 - Budget
+Code</a>)</p>
+<p>Then, run the script with
+<code>sbatch firedrake_check.slurm</code>.</p>
+<h2 id="thetis-install">Thetis Install</h2>
 <p>To install Thetis, you must activate the generated Firedrake python
 environment and then you can install Thetis as normal as per website: <a
 href="https://thetisproject.org/download.html#installing-thetis">Thetis
